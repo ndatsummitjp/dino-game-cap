@@ -1,0 +1,1 @@
+using DinoService as service from '../../srv/dino-service';

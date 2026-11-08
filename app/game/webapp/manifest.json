@@ -1,0 +1,122 @@
+{
+  "_version": "1.84.0",
+  "sap.app": {
+    "id": "game",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.24.0",
+      "toolsId": "25f78d1a-9790-4ecc-8750-6a7b10b76adf"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/dino/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.01"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.154.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "game.i18n.i18n",
+          "supportedLocales": [
+            "en",
+            "ja"
+          ],
+          "fallbackLocale": "ja"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "game.view",
+        "async": true,
+        "viewPath": "game.view"
+      },
+      "routes": [
+        {
+          "name": "RouteGame",
+          "pattern": ":?query:",
+          "target": [
+            "TargetGame"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetGame": {
+          "id": "Game",
+          "name": "Game"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "game.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

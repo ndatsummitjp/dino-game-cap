@@ -1,0 +1,37 @@
+<mvc:View controllerName="game.controller.Game"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page id="page" title="{i18n>title}" enableScrolling="false">
+        <headerContent>
+            <Link text="{i18n>manageCharacters}" href="../characterspage/index.html" />
+        </headerContent>
+        <VBox class="gameContent" alignItems="Center" justifyContent="Center" width="100%">
+            <Text text="{i18n>gameEyebrow}" class="gameEyebrow" />
+            <Text text="{i18n>jumpInstructions}" class="gameInstructions" />
+            <HBox class="characterPicker" alignItems="Center" justifyContent="Center">
+                <Label text="{i18n>character}" labelFor="characterSelect" />
+                <Select id="characterSelect"
+                    selectedKey="{characterState>/selectedCharacterId}"
+                    change=".onCharacterChange"
+                    items="{characterState>/characters}">
+                    <core:Item key="{characterState>id}" text="{characterState>name}" />
+                </Select>
+                <Image src="{characterState>/selectedCharacterIdleImageUrl}"
+                    alt="{characterState>/selectedCharacterName}"
+                    visible="{= !!${characterState>/selectedCharacterIdleImageUrl} }"
+                    decorative="false"
+                    width="3rem"
+                    height="3rem"
+                    class="characterPreview" />
+            </HBox>
+            <core:HTML id="gameCanvasHost"
+                content="&lt;div class='gameCanvasHost'&gt;&lt;canvas class='dinoGameCanvas' role='img' aria-label='{i18n>canvasDescription}' tabindex='0'&gt;&lt;/canvas&gt;&lt;/div&gt;" />
+            <HBox class="gameControls" alignItems="Center" justifyContent="Center">
+                <Button text="{i18n>restartGame}" type="Emphasized" press=".onStartGame" />
+                <Button text="{i18n>jump}" press=".onJump" />
+            </HBox>
+            <Text text="{i18n>gameStatus}" class="gameStatus" />
+        </VBox>
+    </Page>
+</mvc:View>
